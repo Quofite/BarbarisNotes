@@ -2,4 +2,4 @@
 /API/.mvn
 /API/target
 /API/src/test
-/API/src/resources
+/API/src/main/resources
