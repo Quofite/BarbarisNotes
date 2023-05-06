@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class DatabaseService {
+public class DatabaseService implements org.barbaris.notesapi.Models.DatabaseService {
     @Autowired
     public JdbcTemplate template;
 
