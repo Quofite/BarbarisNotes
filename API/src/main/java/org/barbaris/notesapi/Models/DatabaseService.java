@@ -10,4 +10,5 @@ public interface DatabaseService {
     List<Map<String, Object>> showAllNotes(UserModel user);
     String deleteNote(NoteModel note);
     String editNote(NoteModel note);
+    String deleteUser(UserModel user);
 }

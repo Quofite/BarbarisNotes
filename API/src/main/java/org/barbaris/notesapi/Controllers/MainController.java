@@ -103,6 +103,18 @@ public class MainController {
         }
     }
 
+    @DeleteMapping("/deleteuser")
+    public ResponseEntity<?> deleteUser(@RequestBody UserModel user) {
+        String response = service.deleteUser(user);
+
+        if(response.equals("OK")) {
+            return new ResponseEntity<>("User deleted", HttpStatus.OK);
+        } else if (response.equals("DB Error")) {
+            return new ResponseEntity<>("Database error", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else {
+            return new ResponseEntity<>("Wrong login or password", HttpStatus.NOT_FOUND);
+        }
+    }
 }
 
 

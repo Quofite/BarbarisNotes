@@ -140,6 +140,30 @@ public class DatabaseService implements org.barbaris.notesapi.Models.DatabaseSer
         }
     }
 
+    public String deleteUser(UserModel user) {
+        String response = login(user);
+
+        if(response.equals("OK")) {
+            String sql = String.format("DELETE FROM notesusers WHERE login='%s';", user.getLogin());
+
+            try {
+                if(!deleteAllNotesByLogin(user)) {
+                    throw new Exception();
+                }
+
+                template.execute(sql);
+
+                return "OK";
+
+            } catch (Exception ex) {
+                return "DB Error";
+            }
+
+        } else {
+            return response;
+        }
+    }
+
     // ---------------
 
     private int getLastNoteId(UserModel user) {
@@ -162,6 +186,24 @@ public class DatabaseService implements org.barbaris.notesapi.Models.DatabaseSer
 
         } else {
             return 0;
+        }
+    }
+
+    private boolean deleteAllNotesByLogin(UserModel user) {
+        String response = login(user);
+
+        if(response.equals("OK")) {
+            String sql = String.format("DELETE FROM notes WHERE login='%s';", user.getLogin());
+
+            try {
+                template.execute(sql);
+                return true;
+            } catch (Exception ex) {
+                return false;
+            }
+
+        } else {
+            return false;
         }
     }
 }
