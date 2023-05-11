@@ -39,7 +39,7 @@ public class MainController {
         }
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UserModel user) {
         String response = service.login(user);
 
